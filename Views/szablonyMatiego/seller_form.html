@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>BOCIAN</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <!-- header section strats -->
+  <header class="header_section">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <img src="images/bocian.jpg" width="5%">
+        <a href="seller.html" class="navbar-brand">
+          <span>SELLER</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""> </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav  ml-auto">
+            <li class="nav-item active">
+              <a href="index.html"><img src="images/home.png" width="30%" alt="home button"></a>
+            </li>
+            <li class="nav-item">
+              <a href="login.html"><img src="images/login.png"  width="30%" alt="login"></a>
+            </li>
+            <!-- LOGOUT!!!!!!!!!!!! -->
+            <li class="nav-item">
+              <a href="index.html"><img src="images/logout.png"  width="30%" alt="login"></a>
+          </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- end header section -->
+  <!-- product section -->
+  <section class="product_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          DODAJ PRODUKT
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-lg-4 mx-auto">
+          <div class="box">
+            <div class="detail-box">
+              <form action="your_backend_endpoint_here" method="POST">
+                <div class="form-group">
+                  <label for="productName">Nazwa Produktu:</label>
+                  <input type="text" id="productName" name="productName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="productDescription">Opis Produktu:</label>
+                  <textarea id="productDescription" name="productDescription" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="productPrice">Cena:</label>
+                  <input type="number" id="productPrice" name="productPrice" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="productImage">Zdjęcie Produktu:</label>
+                  <input type="file" id="productImage" name="productImage" class="form-control-file" required>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Dodaj Produkt</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end product section -->
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By Mateusz Kwijas :)
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.js"></script>
+</body>
+
+</html>
