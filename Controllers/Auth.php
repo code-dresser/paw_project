@@ -15,7 +15,8 @@ class Auth extends BaseController
         // if (session()->has("loggedInUser")){
         //     return redirect()->route("UserController::shop_view");
         // }
-        return view('login_page');
+        return view('header')
+        . view('login_page');
     }
 
     public function registerUser() {
@@ -61,7 +62,8 @@ class Auth extends BaseController
         ]);
 
         if (! $validated) {
-            return view('login_page',['validation'=>$this->validator]);
+            return view('header') 
+            . view('login_page',['validation'=>$this->validator]);
         }
         
         $firstName = $this->request->getPost('firstName');
@@ -70,13 +72,8 @@ class Auth extends BaseController
         $password = $this->request->getPost('password');
         $passwordConf = $this->request->getPost('passwordConf');
 
-        // if session()->get('userRole') == 'admin'{
-        //     $role = 'seller';
-        // }else{
-        //     $role = 'user';
-        // }
 
-        $role = if session()->get('userRole') == 'admin' ? "seller" : "user";
+        $role = (session()->get('userRole') == 'admin') ? "seller" : "user";
 
         $data = [
             'firstName' => $firstName,
@@ -118,7 +115,8 @@ class Auth extends BaseController
         ]);
 
         if (! $validated) {
-            return view('login_page',['validation'=>$this->validator]);
+            return view('header')
+            . view('login_page',['validation'=>$this->validator]);
         }
 
         $email = $this->request->getPost('email');
@@ -127,16 +125,16 @@ class Auth extends BaseController
         $userModel = new UserModel();
         $userInfo = $userModel->where('email', $email)->first();
 
-        if(!password_verify($password, $userInfo['pass_hash'])){
+        if( empty($userInfo) || !password_verify($password, $userInfo['pass_hash'])){
             session()->setFlashdata('fail_L', 'Incorrect password provided');
-            return redirect()->to('login_page');
+            return redirect()->to('login');
         }
         else{
             
             session()->set("loggedInUser",$userInfo['ID']);
             session()->set("userRole",$userInfo['user_role']);
 
-            return redirect()->route("UserController::user_view");
+            return redirect()->route("UserController::shop_view");
             
         }
     }

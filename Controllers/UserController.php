@@ -18,7 +18,8 @@ class UserController extends BaseController
             'user' => $userModel->find($userID) ,
         ];
         if(isset($userID) && session()->get('userRole') == 'user') {
-            return view('userPanel',$data);
+            return view('header') 
+            . view('userPanel',$data);
         }else{
            return redirect()->to("/login")->with('fail_L','Failed to authenticate.');
         }
@@ -34,6 +35,7 @@ class UserController extends BaseController
             'products' => $productModel->findAll(), 
             'user' => $user
         ];
-        return view('shopView',$data);
+        return view('header')
+        . view('shopView',$data);
     }
 }

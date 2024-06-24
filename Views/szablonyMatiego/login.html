@@ -8,7 +8,7 @@
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <!-- Site Metas -->
-  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <link rel="icon" href="<?php echo base_url(); ?>images/fevicon.png" type="image/gif" />
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
@@ -16,18 +16,18 @@
   <title>BOCIAN - Login</title>
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/bootstrap.css" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="<?php echo base_url(); ?>css/font-awesome.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet" />
 
 </head>
 
@@ -36,7 +36,7 @@
   <header class="header_section">
     <div class="container">
       <nav class="navbar navbar-expand-lg custom_nav-container ">
-        <img src="images/bocian.jpg" width="5%">
+        <img src="<?php echo base_url(); ?>images/bocian.jpg" width="5%">
         <a class="navbar-brand">
           <span>BOCIAN</span>
         </a>
@@ -48,13 +48,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav  ml-auto">
             <li class="nav-item active">
-              <a href="index.html"><img src="images/home.png" width="30%" alt="home button"></a>
+              <a href="<?php echo base_url();?>"><img src="<?php echo base_url(); ?>images/home.png" width="30%" alt="home button"></a>
             </li>
             <li class="nav-item">
-              <a href="login.html"><img src="images/login.png"  width="30%" alt="login"></a>
+              <a href="<?php echo base_url('/login');?>"><img src="<?php echo base_url(); ?>images/login.png"  width="30%" alt="login"></a>
             </li>
             <li class="nav-item">
-              <a href="cart.html"><img src="images/koszyk.png"  width="30%" alt="cart"></a>
+              <a href="cart.html"><img src="<?php echo base_url(); ?>images/koszyk.png"  width="30%" alt="cart"></a>
             </li>
           </ul>
         </div>
@@ -68,17 +68,38 @@
     <div class="heading_container heading_center">
       <h2>Zaloguj, zarejestruj w/e</h2>
       <p>Zniszcz swoje uzębienie dając nam zarobić!</p>
+      <?php
+      if(!empty(session()->getFlashData('success_L'))){?>
+          <div>
+              <?=
+                  session()->getFlashData('success_L')
+              ?>
+          </div>
+  <?php
+      }else if(!empty(session()->getFlashData('fail_L'))){?>
+          <div>
+              <?=
+                  session()->getFlashData('fail_L')
+              ?>
+          </div>
+      <?php
+      }
+
+  ?>
     </div>
     <div class="row">
       <div class="col-md-6">
         <div class="form_container">
           <h3>Zaloguj się</h3>
-          <form action="login.php" method="POST">
+          <form action="<?= base_url("auth/loginUser") ?>" method='post'>
+            <?= csrf_field() ;?>
             <div>
-              <input type="text" placeholder="E-mail" name="username" required />
+              <span><?= isset($validation) ? display_form_errors($validation,'email') : "" ?></span>
+              <input name="email" value="<?= set_value('email') ;?>"  placeholder="email" type='email'>
             </div>
             <div>
-              <input type="password" placeholder="Hasło" name="password" required />
+              <span><?= isset($validation) ? display_form_errors($validation,'password') : "" ?></span>
+              <input name="password" value="<?= set_value('password') ;?>" placeholder="password" type='text'>
             </div>
             <div class="btn-box">
               <button type="submit" class="btn-1">
@@ -91,21 +112,45 @@
       <div class="col-md-6">
         <div class="form_container">
           <h3>Zarejestruj się</h3>
-          <form action="register.php" method="POST">
+          <?php
+          if(!empty(session()->getFlashData('success'))){?>
+              <div>
+                  <?=
+                      session()->getFlashData('success')
+                  ?>
+              </div>
+      <?php
+          }else if(!empty(session()->getFlashData('fail'))){?>
+              <div>
+                  <?=
+                      session()->getFlashData('fail')
+                  ?>
+              </div>
+          <?php
+          }
+
+      ?>
+          <form action="<?= base_url("auth/registerUser") ?>" method='post'>
+            <?= csrf_field() ;?>
             <div>
-              <input type="email" placeholder="Imię" name="first name" required />
+              <span><?= isset($validation) ? display_form_errors($validation,'firstName') : "" ?></span>
+              <input name="firstName" value="<?= set_value('firstName') ;?>"  placeholder="First Name" type='text'>
             </div>
             <div>
-              <input type="email" placeholder="Nazwisko" name="last name" required />
+              <span><?= isset($validation) ? display_form_errors($validation,'lastName') : "" ?></span>
+              <input name="lastName" value="<?= set_value('lastName') ;?>" placeholder="Last Name" type='text'>
             </div>
             <div>
-              <input type="email" placeholder="E-mail" name="email" required />
+              <span><?= isset($validation) ? display_form_errors($validation,'email') : "" ?></span>
+              <input name="email" value="<?= set_value('email') ;?>"  placeholder="email" type='text'>
             </div>
             <div>
-              <input type="password" placeholder="Hasło" name="password" required />
+              <span><?= isset($validation) ? display_form_errors($validation,'password') : "" ?></span>
+              <input name="password" value="<?= set_value('password') ;?>" placeholder="password" type='password'>
             </div>
             <div>
-              <input type="password" placeholder="Potwierdź hasło" name="confirm_password" required />
+              <span><?= isset($validation) ? display_form_errors($validation,'passwordConf') : "" ?></span>
+              <input name="passwordConf" placeholder="confirm password" type='password'>
             </div>
             <div class="btn-box">
               <button type="submit" class="btn-2">
