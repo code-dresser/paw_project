@@ -37,6 +37,7 @@
     
     $(document).ready(() => {
       document.getElementById('cart-count').textContent = cartItemCount;
+      document.getElementById('cart').value = JSON.stringify(Object.fromEntries(cart));
     })
 
   </script>
@@ -69,11 +70,14 @@
                 "<a href=\"". base_url("/login") ."\"><img src=\"" .  base_url() . "images/user.png\" width=\"30%\" alt=\"login\"></a>" ?>
             </li>
             <li class="nav-item">
-              <a href="<?= base_url("/cart");?>" style="position: relative;">
+              <a href="javascript:document.getElementById('cartForm').submit();"  style="position: relative;">
                 <img src="<?php echo base_url(); ?>images/koszyk.png" width="30%" alt="cart">
                 <span id="cart-count"
                   style="position: absolute; top: 0; right: 0; background: #3a5f51; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">0</span>
               </a>
+              <form id='cartForm' action="<?= base_url("/cart"); ?>" method='post'>
+                <input type='hidden' name='cart' id='cart'>
+              </form>
             </li>
 
             <li class="nav-item">

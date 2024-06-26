@@ -11,4 +11,6 @@ $routes->post('/auth/registerUser','Auth::registerUser');
 $routes->post('/auth/loginUser','Auth::loginUser');
 $routes->get("/userPanel",'UserController::user_view');
 $routes->get('/', 'UserController::shop_view');
+$routes->post('/cart', 'UserController::cart');
 $routes->get('/logout', 'Auth::logout');
+
