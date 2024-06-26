@@ -161,33 +161,39 @@
   <script src="<?php echo base_url(); ?>js/bootstrap.js"></script>
 
   <script>
-    // Początkowa liczba artykułów w koszyku
-    let cartItemCount = 0;
+    // Ustala liczbę artykułów w koszyku
+    function getItemCount(cartMap) {
+      let sum = 0;
+      cartMap.forEach((v) => {sum += v});
+      return sum;
+    }
 
-    // Funkcja do aktualizacji licznika artykułów w koszyku
-    function updateCartCount() {
-      cartItemCount++;
+   // Funkcja do aktualizacji licznika artykułów w koszyku
+      function updateCartCount(keyName) {
+      if (cart.has(keyName)) {
+        cart.set(keyName,cart.get(keyName) + 1);
+      }else {
+        cart.set(keyName,1);
+      }
+      cartItemCount = getItemCount(cart);
       document.getElementById('cart-count').textContent = cartItemCount;
     }
+
+    var cart = new Map();
+    var cartItemCount = getItemCount(cart);
+    
+
+
 
     // event listener do przycisków dodawania produktów do koszyka
     document.querySelectorAll('.detail-box a').forEach(productLink => {
       productLink.addEventListener('click', function (event) {
         event.preventDefault(); // Zatrzymanie domyślnego działania linku
-        updateCartCount(); // Aktualizacja licznika artykułów w koszyku
+        let keyName =  (event.target || event.srcElement).innerHTML.trim();
+        updateCartCount(keyName); // Aktualizacja licznika artykułów w koszyku
       });
     });
 
-    // Obsługa formularza, aby przekierować użytkownika na odpowiednią stronę
-    function handleFormSubmit(event) {
-      event.preventDefault();
-      var email = document.getElementById('email_input').value;
-      if (email === 'seller@bocian.com') {
-        window.location.href = 'seller.html';
-      } else if (email === 'admin@bocian.com') {
-        window.location.href = 'admin.html';
-      }
-    }
   </script>
 
 </body>
