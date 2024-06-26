@@ -27,6 +27,19 @@
   <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="<?php echo base_url(); ?>css/responsive.css" rel="stylesheet" />
+  <!-- jQuery -->
+  <script src="<?php echo base_url(); ?>js/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap js -->
+  <script src="<?php echo base_url(); ?>js/bootstrap.js"></script>
+  <script>
+    var cart = sessionStorage.getItem('cart') ? new Map(Object.entries(JSON.parse(sessionStorage.getItem('cart')))) : new Map();
+    var cartItemCount = sessionStorage.getItem('itemsCount') ? sessionStorage.getItem('itemsCount') : 0 ;
+    
+    $(document).ready(() => {
+      document.getElementById('cart-count').textContent = cartItemCount;
+    })
+
+  </script>
 
 </head>
 
@@ -49,14 +62,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav  ml-auto">
             <li class="nav-item active">
-              <a href="index.html"><img src="<?php echo base_url(); ?>images/home.png" width="30%" alt="home button"></a>
+              <a href="<?= base_url(); ?>"><img src="<?php echo base_url(); ?>images/home.png" width="30%" alt="home button"></a>
             </li>
             <li class="nav-item">
               <?php echo session()->has("loggedInUser") ?  "<img src=\"" .  base_url() . "images/l_user.png\" width=\"30%\" alt=\"login\">" : 
                 "<a href=\"". base_url("/login") ."\"><img src=\"" .  base_url() . "images/user.png\" width=\"30%\" alt=\"login\"></a>" ?>
             </li>
             <li class="nav-item">
-              <a href="cart.html" style="position: relative;">
+              <a href="<?= base_url("/cart");?>" style="position: relative;">
                 <img src="<?php echo base_url(); ?>images/koszyk.png" width="30%" alt="cart">
                 <span id="cart-count"
                   style="position: absolute; top: 0; right: 0; background: #3a5f51; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">0</span>

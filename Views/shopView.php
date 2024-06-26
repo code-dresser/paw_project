@@ -155,10 +155,7 @@
   </footer>
   <!-- footer section -->
 
-  <!-- jQuery -->
-  <script src="<?php echo base_url(); ?>js/jquery-3.4.1.min.js"></script>
-  <!-- Bootstrap js -->
-  <script src="<?php echo base_url(); ?>js/bootstrap.js"></script>
+
 
   <script>
     // Ustala liczbę artykułów w koszyku
@@ -176,15 +173,10 @@
         cart.set(keyName,1);
       }
       cartItemCount = getItemCount(cart);
+      sessionStorage.setItem('itemsCount',cartItemCount);
+      sessionStorage.setItem('cart',JSON.stringify(Object.fromEntries(cart)));
       document.getElementById('cart-count').textContent = cartItemCount;
     }
-
-    var cart = new Map();
-    var cartItemCount = getItemCount(cart);
-    
-
-
-
     // event listener do przycisków dodawania produktów do koszyka
     document.querySelectorAll('.detail-box a').forEach(productLink => {
       productLink.addEventListener('click', function (event) {
