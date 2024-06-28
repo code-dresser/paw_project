@@ -25,6 +25,25 @@ class UserController extends BaseController
         }
     }
 
+    public function update_user()
+    {
+        $userModel = new UserModel();
+        $userID = session()->get("loggedInUser");
+        $user = $userModel->find($userID);
+        if(isset($userID) && session()->get('userRole') == 'user') {
+            $data = [
+            'firstName' => $this->request->getPost('first_name'),
+            "lastName" => $this->request->getPost('last_name'),
+            "email" =>$this->request->getPost('email'),
+            "Phone" => $this->request->getPost('phone') ];
+            $userModel->update($userID,$data);
+            return redirect()->to("/userPanel");
+
+        }else{
+           return redirect()->to("/login")->with('fail_L','Failed to authenticate.');
+        }
+    }
+
     public function shop_view() {
 
         $productModel = new ProductModel();

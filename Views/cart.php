@@ -40,11 +40,11 @@
                   </td>
                   <td>$<?= $prices[$name] ?></td>
                   <td>
-                    <input type="number" value="<?= $amount ?>" min="1">
+                    <input type="number" value="<?= $amount ?>" min="1" onchange="calculateTotal()">
                   </td>
-                  <td>$<?= $prices[$name] * $amount ?></td>
+                  <td class="sum">$<?= $prices[$name] * $amount ?></td>
                   <td>
-                    <button class="btn btn-danger">Usuń (no tylko spróbuj...)</button>
+                    <button class="btn btn-danger" onclick="Delete(this,'<?=$name?>')">Usuń (no tylko spróbuj...)</button>
                   </td>
                 </tr>
                 <?php 
@@ -53,7 +53,7 @@
               </tbody>
             </table>
             <div class="total_container">
-              <h5>Razem: $<?= $sum ?></h5>
+              <h5 id="Total">Razem: $<?= $sum ?></h5>
               <button class="btn btn-primary">PŁAĆ!</button>
             </div>
           </div>

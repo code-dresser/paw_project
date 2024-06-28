@@ -10,6 +10,7 @@ $routes->get('/login','Auth::show_view');
 $routes->post('/auth/registerUser','Auth::registerUser');
 $routes->post('/auth/loginUser','Auth::loginUser');
 $routes->get("/userPanel",'UserController::user_view');
+$routes->post("/userPanel",'UserController::update_user');
 $routes->get('/', 'UserController::shop_view');
 $routes->post('/cart', 'UserController::cart');
 $routes->get('/logout', 'Auth::logout');

@@ -66,7 +66,7 @@
               <a href="<?= base_url(); ?>"><img src="<?php echo base_url(); ?>images/home.png" width="30%" alt="home button"></a>
             </li>
             <li class="nav-item">
-              <?php echo session()->has("loggedInUser") ?  "<img src=\"" .  base_url() . "images/l_user.png\" width=\"30%\" alt=\"login\">" : 
+              <?php echo session()->has("loggedInUser") ?  "<a href=\"". base_url("/userPanel") ."\"><img src=\"" .  base_url() . "images/l_user.png\" width=\"30%\" alt=\"login\"></a>" : 
                 "<a href=\"". base_url("/login") ."\"><img src=\"" .  base_url() . "images/user.png\" width=\"30%\" alt=\"login\"></a>" ?>
             </li>
             <li class="nav-item">

@@ -25,12 +25,12 @@
             </div>
             <div class="detail-box">
               <!-- PRODUKTY Z BAZY HEREE!!!!!!!!!!!! -->
-              <a href="">
+              <a href="" price='<?= $products[$j]['productPrice'] ?>'>
                 <?= $products[$j]['productTitle'] ?>
               </a>
               <div class="price_box">
                 <h6 class="price_heading">
-                  <span>$</span> <?= $products[$j]['productPrice'] ?>
+                  <span>$<?= $products[$j]['productPrice'] ?></span> 
                 </h6>
               </div>
             </div>
@@ -175,6 +175,7 @@
       cartItemCount = getItemCount(cart);
       sessionStorage.setItem('itemsCount',cartItemCount);
       sessionStorage.setItem('cart',JSON.stringify(Object.fromEntries(cart)));
+      document.getElementById('cart').value = JSON.stringify(Object.fromEntries(cart));
       document.getElementById('cart-count').textContent = cartItemCount;
     }
     // event listener do przycisków dodawania produktów do koszyka
