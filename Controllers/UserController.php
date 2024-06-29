@@ -7,7 +7,7 @@ class UserController extends BaseController
 {
 
     public function __construct() {
-        helper(['url','form','session']);
+        helper(['url','form','session','html']);
     }
 
     public function user_view()

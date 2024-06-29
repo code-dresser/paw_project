@@ -21,7 +21,7 @@
         <div class="box">
             <div class="img-box">
               <!-- Trzeba wstawić obrazek z bazy -->
-              <img src="<?php echo base_url(); ?>images/p1.png" alt="">
+              <img src="<?php echo ($products[$j]['productImage'] != NULL) ? img_data($products[$j]['productImage']) : img_data(WRITEPATH . 'uploads/images/about-img.png'); ?>" alt="">
             </div>
             <div class="detail-box">
               <!-- PRODUKTY Z BAZY HEREE!!!!!!!!!!!! -->
