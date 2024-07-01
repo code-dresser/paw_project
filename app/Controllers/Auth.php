@@ -134,6 +134,10 @@ class Auth extends BaseController
             session()->set("loggedInUser",$userInfo['ID']);
             session()->set("userRole",$userInfo['user_role']);
 
+            $data = [
+                'user' => $userInfo
+            ];
+
             if($userInfo['user_role'] == 'user') {
                 return view('header') 
                 . view('userPanel',$data);

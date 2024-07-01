@@ -1,4 +1,5 @@
 
+  
   <!-- product section -->
   <section class="product_section layout_padding">
     <div class="container">
@@ -25,7 +26,7 @@
             </div>
             <div class="detail-box">
               <!-- PRODUKTY Z BAZY HEREE!!!!!!!!!!!! -->
-              <a href="" price='<?= $products[$j]['productPrice'] ?>'>
+              <a href="<?= base_url("add/". $products[$j]['ID']. "") ?>" price='<?= $products[$j]['productPrice'] ?>'>
                 <?= $products[$j]['productTitle'] ?>
               </a>
               <div class="price_box">
@@ -122,7 +123,7 @@
           </div>
         </div>
         <div class="info_logo">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="<?=base_url("/")?>">
             <span>
               BOCIAN®
             </span>
@@ -154,40 +155,6 @@
     </div>
   </footer>
   <!-- footer section -->
-
-
-
-  <script>
-    // Ustala liczbę artykułów w koszyku
-    function getItemCount(cartMap) {
-      let sum = 0;
-      cartMap.forEach((v) => {sum += v});
-      return sum;
-    }
-
-   // Funkcja do aktualizacji licznika artykułów w koszyku
-      function updateCartCount(keyName) {
-      if (cart.has(keyName)) {
-        cart.set(keyName,cart.get(keyName) + 1);
-      }else {
-        cart.set(keyName,1);
-      }
-      cartItemCount = getItemCount(cart);
-      sessionStorage.setItem('itemsCount',cartItemCount);
-      sessionStorage.setItem('cart',JSON.stringify(Object.fromEntries(cart)));
-      document.getElementById('cart').value = JSON.stringify(Object.fromEntries(cart));
-      document.getElementById('cart-count').textContent = cartItemCount;
-    }
-    // event listener do przycisków dodawania produktów do koszyka
-    document.querySelectorAll('.detail-box a').forEach(productLink => {
-      productLink.addEventListener('click', function (event) {
-        event.preventDefault(); // Zatrzymanie domyślnego działania linku
-        let keyName =  (event.target || event.srcElement).innerHTML.trim();
-        updateCartCount(keyName); // Aktualizacja licznika artykułów w koszyku
-      });
-    });
-
-  </script>
 
 </body>
 

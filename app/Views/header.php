@@ -31,16 +31,7 @@
   <script src="<?php echo base_url(); ?>js/jquery-3.4.1.min.js"></script>
   <!-- Bootstrap js -->
   <script src="<?php echo base_url(); ?>js/bootstrap.js"></script>
-  <script>
-    var cart = sessionStorage.getItem('cart') ? new Map(Object.entries(JSON.parse(sessionStorage.getItem('cart')))) : new Map();
-    var cartItemCount = sessionStorage.getItem('itemsCount') ? sessionStorage.getItem('itemsCount') : 0 ;
-    
-    $(document).ready(() => {
-      document.getElementById('cart-count').textContent = cartItemCount;
-      document.getElementById('cart').value = JSON.stringify(Object.fromEntries(cart));
-    })
 
-  </script>
 
 </head>
 
@@ -72,10 +63,10 @@
             <li class="nav-item">
               <a href="javascript:document.getElementById('cartForm').submit();"  style="position: relative;">
                 <img src="<?php echo base_url(); ?>images/koszyk.png" width="30%" alt="cart">
-                <span id="cart-count"
-                  style="position: absolute; top: 0; right: 0; background: #3a5f51; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">0</span>
+                <span
+                  style="position: absolute; top: 0; right: 0; background: #3a5f51; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;"><?= get_cart_item_count() ?></span>
               </a>
-              <form id='cartForm' action="<?= base_url("/cart"); ?>" method='post'>
+              <form id='cartForm' action="<?= base_url("/cart"); ?>">
                 <input type='hidden' name='cart' id='cart'>
               </form>
             </li>

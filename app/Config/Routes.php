@@ -15,7 +15,10 @@ $routes->get('/logout', 'Auth::logout');
 $routes->get("/userPanel",'UserController::user_view');
 $routes->post("/userPanel",'UserController::update_user');
 $routes->get('/', 'UserController::shop_view');
-$routes->post('/cart', 'UserController::cart');
+$routes->get('/cart', 'CartController::showCart');
+$routes->get('/add/(:num)', 'CartController::addItem/$1');
+$routes->post('/cart/delete/(:num)', 'CartController::deleteItem/$1');
+$routes->post('/cart/update/(:num)', 'CartController::updateItem/$1');
 //Seller routes
 $routes->get('/products', 'SellerController::seller_view');
 $routes->get('/product', 'SellerController::product');

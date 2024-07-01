@@ -5,7 +5,6 @@ use App\Models\UserModel;
 use App\Models\ProductModel;
 class UserController extends BaseController
 {
-
     public function __construct() {
         helper(['url','form','session','html']);
     }
@@ -63,21 +62,5 @@ class UserController extends BaseController
         ];
         return view('header')
         . view('shopView',$data);
-    }
-
-    public function cart() {
-        $productModel = new ProductModel();
-        $prices = $productModel->select("productTitle,productPrice")->findAll();
-        $map = [];
-        $items = json_decode($_POST['cart'],TRUE);
-        foreach($prices as $price) {
-            $map[$price['productTitle']] = floatval($price['productPrice']);
-        }
-        $data = [
-            'prices' => $map,
-            'items' => $items
-        ];
-        return view('header') 
-        . view('cart',$data);
     }
 }
