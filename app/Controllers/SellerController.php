@@ -42,7 +42,7 @@ class SellerController extends BaseController
         $title = $this->request->getPost('productName');
         $description = $this->request->getPost('productDescription');
         $image = $this->request->getFile('productImage');
-        $filepath = WRITEPATH . 'uploads/' . $image->store('images/',$image->getName()) ; 
+        $filepath = 'uploads/' . $image->store('images/',$image->getName()) ; 
         $image_name =  $filepath;
         $price = $this->request->getPost('productPrice');
         $data = [
