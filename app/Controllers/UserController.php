@@ -24,6 +24,10 @@ class UserController extends BaseController
         if(isset($userID) && session()->get('userRole') == 'admin') {
             return redirect()->to("/admin");
         }
+        if(isset($userID) && session()->get('userRole') == 'seller') {
+            return redirect()->to("/products");
+        }
+
 
         return redirect()->to("/login")->with('fail_L','Failed to authenticate.');
     }

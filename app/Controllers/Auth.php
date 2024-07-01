@@ -134,10 +134,15 @@ class Auth extends BaseController
             session()->set("loggedInUser",$userInfo['ID']);
             session()->set("userRole",$userInfo['user_role']);
 
-            if ($userInfo['user_role'] == 'admin') {
-                return redirect()->route("AdminController::admin_view");
-            } else {
-                return redirect()->route("UserController::shop_view");
+            if($userInfo['user_role'] == 'user') {
+                return view('header') 
+                . view('userPanel',$data);
+            }
+            if($userInfo['user_role'] == 'admin') {
+                return redirect()->to("/admin");
+            }
+            if($userInfo['user_role'] == 'seller') {
+                return redirect()->to("/products");
             }
         }
     }

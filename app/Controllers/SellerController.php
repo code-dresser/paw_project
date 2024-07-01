@@ -11,17 +11,30 @@ class SellerController extends BaseController
         
     }
 
+    private function checkRole() {
+        $userID = session()->get("loggedInUser");
+        if(isset($userID) && session()->get('userRole') == 'seller') {
+            return true;
+        }
+        return false;
+    }
+
     public function seller_view() {
+    if ($this->checkRole()) {
         $productModel = new ProductModel();
         $data = [
             'products' => $productModel->findAll()
         ];
         return view('header')
         . view('seller_view',$data);
+    }else{
+        return redirect()->to("/login")->with('fail_L','Failed to authenticate.');
+    }
     }
 
 
     public function product($id = NULL) {
+        if ( $this->checkRole() ) {
         $productModel = new ProductModel();
         if ($id === NULL) {
             return view('header') . view('productForm');
@@ -31,33 +44,46 @@ class SellerController extends BaseController
             ];
             return view('header') . view('productForm',$data);
         }
+    }else{
+        return redirect()->to("/login")->with('fail_L','Failed to authenticate.');
+    }
 
     }
 
 
     public function save() {
-        
+        if ( $this->checkRole() ) {
         $productModel = new ProductModel();
         $id = $this->request->getPost("id");
         $title = $this->request->getPost('productName');
         $description = $this->request->getPost('productDescription');
-        $image = $this->request->getFile('productImage');
-        $filepath = 'uploads/' . $image->store('images/',$image->getName()) ; 
-        $image_name =  $filepath;
+        $image = $this->request->getFile('productImage')->isValid() ? $this->request->getFile('productImage') : NULL;
         $price = $this->request->getPost('productPrice');
-        $data = [
-            'productTitle' => $title,
-            'productDescription' => $description,
-            'productImage' => $image_name,
-            'productPrice' => $price
-        ];
         if ($id == "NULL" ) {
+            $filepath = ($image == NULL)  ? "uploads/images/about-img.png" : 'uploads/' . $image->store('images/',$image->getName()) ; 
+            $data = [
+                'productTitle' => $title,
+                'productDescription' => $description,
+                'productImage' => $filepath,
+                'productPrice' => $price
+            ];
             $productModel->save($data);
+            
         }else  {
+            $filepath = ($image == NULL) ? $productModel->select("productImage")->where('id',$id)->findAll()[0] : 'uploads/' . $image->store('images/',$image->getName());
+            $data = [
+                'productTitle' => $title,
+                'productDescription' => $description,
+                'productImage' => $filepath,
+                'productPrice' => $price
+            ];
             $productModel->update(intval($id),$data);
         }
 
         return redirect()->to("/products");
+    }else{
+        return redirect()->to("/login")->with('fail_L','Failed to authenticate.');
+    }
     }
 
 }
