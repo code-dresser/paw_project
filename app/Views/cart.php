@@ -21,11 +21,8 @@
                         <tbody>
                             <?php
                             $sum = 0;
-                            if (session()->has('cart')) {
-                                $cart = session()->get('cart');
-                                $sum = 0;
-                                
-                                foreach ($cart as $item) {
+                            if ($items != NULL) {
+                                foreach ($items as $item) {
                                     $subtotal = $item['price'] * $item['qty'];
                                     echo "<tr>
                                             <td>{$item['name']}</td>

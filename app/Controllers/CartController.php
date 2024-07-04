@@ -94,7 +94,7 @@ class CartController extends Controller
     public function showCart() {
         $session = session();
         $cart = $session->get('cart');
-        $data['items'] = array_values($cart);
+        $data['items'] = (!empty(session()->get('cart'))) ? array_values($cart) : NULL;
         return view('header') 
         . view('cart', $data);
     }
