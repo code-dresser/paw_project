@@ -56,6 +56,60 @@
                         <h5 id="Total">Razem: <?= $sum ?> $</h5>
                         <button class="btn btn-primary">PŁAĆ!</button>
                     </div>
+
+                    <!-- cart delivery form -->
+                    <div class="delivery_form_container">
+                        <form action="<?= base_url('/order/submit') ?>" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Imię i nazwisko</label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Adres</label>
+                                <input type="text" class="form-control" id="address" name="address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Miasto</label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="postal_code">Kod pocztowy</label>
+                                <input type="text" class="form-control" id="postal_code" name="postal_code" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Telefon</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="delivery_method">Forma dostawy</label>
+                                <select class="form-control" id="delivery_method" name="delivery_method" required>
+                                    <option value="courier">Kurier</option>
+                                    <option value="pickup">Odbiór osobisty</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="payment_method">Forma płatności</label>
+                                <select class="form-control" id="payment_method" name="payment_method" required>
+                                    <option value="credit_card">Karta kredytowa</option>
+                                    <option value="paypal">PayPal</option>
+                                    <option value="bank_transfer">Przelew bankowy</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success">Złóż zamówienie</button>
+                        </form>
+                    </div>
+            <!-- end cart delivery form -->
+            
                 </div>
             </div>
         </div>
