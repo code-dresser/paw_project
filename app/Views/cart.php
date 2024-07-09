@@ -54,9 +54,8 @@
                     </table>
                     <div class="total_container">
                         <h5 id="Total">Razem: <?= $sum ?> $</h5>
-                        <button class="btn btn-primary">PŁAĆ!</button>
                     </div>
-
+                    <?php if (session()->has("loggedInUser")) { ?>
                     <!-- cart delivery form -->
                     <div class="delivery_form_container">
                         <form action="<?= base_url('/order/submit') ?>" method="post">
@@ -64,7 +63,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Imię i nazwisko</label>
-                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <input type="text" class="form-control" id="name" name="name" value=required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -107,6 +106,10 @@
                             </div>
                             <button type="submit" class="btn btn-success">Złóż zamówienie</button>
                         </form>
+                        <?php }
+                              else {
+                                echo "<a href='" . base_url("/login") . "' style='margin:auto' class='btn btn-info'>Zaloguj się aby kontunuować zakupy</a>";
+                              }?>
                     </div>
             <!-- end cart delivery form -->
             

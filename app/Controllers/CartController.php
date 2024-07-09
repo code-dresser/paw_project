@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\ProductModel;
+use App\Models\UserModel;
 
 class CartController extends Controller
 {
@@ -92,9 +93,11 @@ class CartController extends Controller
     
     
     public function showCart() {
+        $userModel = new UserModel();
         $session = session();
         $cart = $session->get('cart');
         $data['items'] = (!empty(session()->get('cart'))) ? array_values($cart) : NULL;
+        $data['user'] = $userModel->find($session->get('loggedInUser'));
         return view('header') 
         . view('cart', $data);
     }
