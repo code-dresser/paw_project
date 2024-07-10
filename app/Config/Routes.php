@@ -19,6 +19,7 @@ $routes->get('/cart', 'CartController::showCart');
 $routes->get('/add/(:num)', 'CartController::addItem/$1');
 $routes->post('/cart/delete/(:num)', 'CartController::deleteItem/$1');
 $routes->post('/cart/update/(:num)', 'CartController::updateItem/$1');
+$routes->post('/order/submit','CartController::placeOrder');
 //Seller routes
 $routes->get('/products', 'SellerController::seller_view');
 $routes->get('/product', 'SellerController::product');

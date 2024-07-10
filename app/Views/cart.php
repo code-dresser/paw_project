@@ -57,19 +57,25 @@
                     </div>
                     <?php if (session()->has("loggedInUser")) { ?>
                     <!-- cart delivery form -->
-                    <div class="delivery_form_container">
+                    <div class="delivery_form_container">        
+                        <?php if(!empty(session()->getFlashData('success'))){?>
+                            <div> <?= session()->getFlashData('success') ?> </div>
+                        <?php
+                        }else if(!empty(session()->getFlashData('fail'))){?>
+                            <div><?= session()->getFlashData('fail')?> </div>
+                        <?php } ?>
                         <form action="<?= base_url('/order/submit') ?>" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Imię i nazwisko</label>
-                                        <input type="text" class="form-control" id="name" name="name" value=required>
+                                        <input type="text" class="form-control" id="name" name="name" value="<?= ($user != NULL) ? $user['firstName'] . " ". $user['lastName'] : "" ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <input type="email" class="form-control" id="email" name="email" value="<?= ($user != NULL) ? $user['email'] : "" ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +93,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">Telefon</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                                <input type="tel" class="form-control" id="phone" name="phone" value="<?= ($user != NULL) ? $user['Phone'] : "" ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="delivery_method">Forma dostawy</label>
