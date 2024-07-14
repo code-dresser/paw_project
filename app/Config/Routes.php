@@ -29,3 +29,4 @@ $routes->post('/saveProduct', 'SellerController::save');
 $routes->get('/admin', 'AdminController::admin_view');
 $routes->get('/adminForm', 'AdminController::admin_seller_form');
 $routes->get('/admin_history', 'AdminController::admin_purchase_history');
+$routes->post('/admin_history', 'AdminController::adminPurchaseHistory');   

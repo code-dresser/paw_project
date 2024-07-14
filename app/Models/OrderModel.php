@@ -6,6 +6,8 @@ use CodeIgniter\Model;
 
 class OrderModel extends Model
 {
+    const UPDATED_AT = null;
+
     protected $table      = 'orders';
     protected $primaryKey = 'orderID';
 
@@ -17,9 +19,13 @@ class OrderModel extends Model
     protected $allowedFields = ['orderID', 'customersID', 'fullName', 'email', 'adress', 'city', 'postalCode', 'phone', 'deliveryMethod', 'paymentMethod','cart'];
 
     //Dates
-    protected $useTimestamps = True;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
+
+
 
 
     // Validation

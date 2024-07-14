@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\ProductModel;
+use App\Models\OrderModel;
 class UserController extends BaseController
 {
     public function __construct() {
@@ -12,9 +13,32 @@ class UserController extends BaseController
     public function user_view()
     {
         $userModel = new UserModel();
+        $productModel = new ProductModel();
+        $orderModel = new OrderModel();
+
         $userID = session()->get("loggedInUser");
+        $userOrders = $orderModel->where('customersID', $userID)->findAll();
+
+        $orderHistory = [];
+
+        foreach ($userOrders as $order) {
+            $cart = json_decode($order['cart'], true);
+            foreach ($cart as $item) {
+                $product = $productModel->find($item['id']);
+                if ($product) {
+                    $orderHistory[] = [
+                        'name' => $product['productTitle'],
+                        'qty' => $item['qty'],
+                        'total' => $item['qty'] * $product['productPrice'],
+                        'created_at' => $order['created_at']
+                    ];
+                }
+            }
+        }
+
         $data = [
-            'user' => $userModel->find($userID) ,
+            'user' => $userModel->find($userID),
+            'orderHistory' => $orderHistory
         ];
         if(isset($userID) && session()->get('userRole') == 'user') {
             return view('header') 
@@ -63,4 +87,6 @@ class UserController extends BaseController
         return view('header')
         . view('shopView',$data);
     }
+
+
 }

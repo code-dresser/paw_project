@@ -60,28 +60,22 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>Data</th>
-                  <th>Produkt</th>
-                  <th>Ilość</th>
-                  <th>Cena</th>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
                   <!-- <th>Status</th> -->
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>2024-06-20</td>
-                  <td>Produkt A</td>
-                  <td>2</td>
-                  <td>100 PLN</td>
-                  <!-- <td>Dostarczono</td> -->
-                </tr>
-                <tr>
-                  <td>2024-06-15</td>
-                  <td>Produkt B</td>
-                  <td>1</td>
-                  <td>50 PLN</td>
-                  <!-- <td>W trakcie realizacji</td> -->
-                </tr>
+                <?php foreach ($orderHistory as $order): ?>
+                  <tr>
+                  <td><?= esc($order['created_at']) ?></td>
+                  <td><?= esc($order['name']) ?></td>
+                  <td><?= esc($order['qty']) ?></td>
+                  <td><?= esc($order['total']. ' $') ?></td>
+                  </tr>
+                <?php endforeach; ?>
               </tbody>
             </table>
           </div>

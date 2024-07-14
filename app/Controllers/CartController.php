@@ -104,6 +104,18 @@ class CartController extends Controller
         . view('cart', $data);
     }
 
+    private function getCartSummary($cart)
+    {
+        $cartSummary = [];
+        foreach ($cart as $item) {
+            $cartSummary[] = [
+                'id'  => $item['id'],
+                'qty' => $item['qty']
+            ];
+        }
+        return $cartSummary;
+    }
+
 
     public function placeOrder() {
         $orderModel = new OrderModel();
@@ -121,6 +133,8 @@ class CartController extends Controller
             if (! $validated ) {
                 return redirect()->to("/cart")->with('fail', 'Incorrect data');
             }else {
+                $cart = session()->get('cart');
+
                 $data = [
                     'customersID' => session()->get("loggedInUser") ,
                     'fullName' => $this->request->getPost("name"),
@@ -131,10 +145,11 @@ class CartController extends Controller
                     'phone' => $this->request->getPost("phone"), 
                     'deliveryMethod' => $this->request->getPost("delivery_method"), 
                     'paymentMethod' => $this->request->getPost("payment_method"),
-                    'cart' => json_encode(session()->get('cart'))
+                    'cart' => json_encode($this->getCartSummary($cart)),
                 ];
                 if ( $orderModel->insert($data,false) ) {
                     session()->setFlashdata('success_c', 'Order placed successfully');
+                    session()->remove('cart');
                     return redirect()->to("/cart");
                 }else {
                     session()->setFlashdata('fail_c', 'Order failed');
